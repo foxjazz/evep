@@ -3,6 +3,7 @@ import {Region} from './region';
 import {EveRegionListComponent} from './everegion-list.component';
 import { HTTPEveService } from './http-eve.service';
 import 'rxjs/Observable';
+import {Regions} from './mock-Regions'
 
 @Component({
     selector: 'my-app',
@@ -16,8 +17,8 @@ export class AppComponent implements OnInit {
      
      getRegions(){
          this.eveService.getRegions()
-                .subscribe(Regions => this.regions = regions,
-                     error =>  this.errorMessage = <any>error);
+                .subscribe(Regions => this.regions = Regions,
+                     error =>  console.log('cannot load regions'));
      }
      ngOnInit() {
     this.getRegions();
