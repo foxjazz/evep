@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
-//import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions, Http, Response } from '@angular/http';
-import 'rxjs/Observable';
+import {  Http, Response } from '@angular/http';
+import  'rxjs/Rx';
 import {Region} from './region';
-
+//import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HTTPEveService {
@@ -11,10 +10,9 @@ export class HTTPEveService {
 
 
   constructor(private http: Http) { }
-  getRegions(): Promise<Region[]> {
+  getRegions(): Observable<Region[]> {
     return this.http.get(this.uri)
-    .toPromise()
-      .then(this.extractData)
+      .map(this.extractData)
       .catch(this.handleError);
   }
   private extractData(res: Response) {

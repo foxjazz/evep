@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Region} from './region';
 import {EveRegionListComponent} from './everegion-list.component';
 import { HTTPEveService } from './http-eve.service';
+import 'rxjs/Observable';
 
 @Component({
     selector: 'my-app',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
      
      getRegions(){
          this.eveService.getRegions()
-                .then(regions => this.regions = regions,
+                .subscribe(Regions => this.regions = regions,
                      error =>  this.errorMessage = <any>error);
      }
      ngOnInit() {
