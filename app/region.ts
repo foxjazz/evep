@@ -1,4 +1,4 @@
-export class Region {
+export interface Region {
   id_str: string;
   href: string;
   id: number;

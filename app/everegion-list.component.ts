@@ -12,7 +12,7 @@ export class EveRegionListComponent implements OnInit {
   ngOnInit() { this.getRegions(); }
   getRegions() {
     this.httpEveService.getRegions()
-                     .then(
+                     .subscribe(
                        regions => this.regions = regions,
                        error =>  this.errorMessage = <any>error);
   }

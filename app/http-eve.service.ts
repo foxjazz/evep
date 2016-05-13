@@ -1,15 +1,15 @@
-import {Injectable} from "@angular/core";
+
+import {Injectable} from '@angular/core';
+import {Region} from './Region';
 import {  Http, Response } from '@angular/http';
-import  'rxjs/Rx';
-import {Region} from './region';
+import {Observable} from 'rxjs/Observable';
 //import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HTTPEveService {
   private uri = 'https://crest-tq.eveonline.com/regions/';
-
-
   constructor(private http: Http) { }
+  
   getRegions(): Observable<Region[]> {
     return this.http.get(this.uri)
       .map(this.extractData)
