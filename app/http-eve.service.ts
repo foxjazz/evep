@@ -8,12 +8,24 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class HTTPEveService {
   private uri = 'https://crest-tq.eveonline.com/regions/';
+  private Regions = Object;
+  result: Object;
   constructor(private http: Http) { }
   
+  /*
   getRegions(): Observable<Region[]> {
-    return this.http.get(this.uri)
+    return <Observable<Region[]>>this.http.get(this.uri)
       .map(this.extractData)
       .catch(this.handleError);
+  }*/
+  getRegions(): Object {
+     this.result = {friends:[]};
+     //this.http.get(this.uri).map((res: Response) => res.json()).subscribe(res => this.result = res);
+     this.http.get(this.uri).map(res => res.json()).subscribe(r => this.Regions = r);
+    return this.Regions;
+    //return this.http.get(this.uri)
+     // .map(this.extractData)
+     // .catch(this.handleError);
   }
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {

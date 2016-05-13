@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Region} from './region';
-import {EveRegionListComponent} from './everegion-list.component';
+//import {EveRegionListComponent} from './everegion-list.component';
 import { HTTPEveService } from './http-eve.service';
 import {HTTP_PROVIDERS} from '@angular/http';
 import 'rxjs/Rx';
@@ -16,13 +16,13 @@ import {Regions} from './mock-Regions';
 export class AppComponent implements OnInit {
     public title ="Regions List";
     private errorMessage = '';
+    private data = {};
     private regions: Region[];
       constructor(private eveService: HTTPEveService) { }
      
      getRegions(){
-         this.eveService.getRegions()
-                .subscribe(Regions => this.regions = Regions,
-                    error =>  this.errorMessage = <any>error);
+         this.data = this.eveService.getRegions();
+               
      }
      ngOnInit() {
     this.getRegions();
