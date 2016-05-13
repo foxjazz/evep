@@ -9,6 +9,8 @@ import {Observable} from 'rxjs/Observable';
 export class HTTPEveService {
   private uri = 'https://crest-tq.eveonline.com/regions/';
   private Regions = Object;
+   data: any;
+    loading: boolean;
   result: Object;
   constructor(private http: Http) { }
   
@@ -18,11 +20,18 @@ export class HTTPEveService {
       .map(this.extractData)
       .catch(this.handleError);
   }*/
-  getRegions(): Object {
-     this.result = {friends:[]};
+  getRegions(): void {
+    this.loading = true;
+        this.http.get(this.uri)
+            .map((res: Response) => res.json())
+            .subscribe(res => {
+                this.data = res;
+                this.loading = false;
+            });
+    // this.result = {friends:[]};
      //this.http.get(this.uri).map((res: Response) => res.json()).subscribe(res => this.result = res);
-     this.http.get(this.uri).map(res => res.json()).subscribe(r => this.Regions = r);
-    return this.Regions;
+    // this.http.get(this.uri).map(res => res.json()).subscribe(r => this.Regions = r);
+  //  return this.Regions;
     //return this.http.get(this.uri)
      // .map(this.extractData)
      // .catch(this.handleError);
