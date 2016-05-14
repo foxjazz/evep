@@ -14,12 +14,7 @@ export class HTTPEveService {
   result: Object;
   constructor(private http: Http) { }
   
-  /*
-  getRegions(): Observable<Region[]> {
-    return <Observable<Region[]>>this.http.get(this.uri)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }*/
+
   getRegions(): void {
     this.loading = true;
         this.http.get(this.uri)
@@ -28,6 +23,17 @@ export class HTTPEveService {
                 this.data = res;
                 this.loading = false;
             });
+  }}
+  
+    /*
+  getRegions(): Observable<Region[]> {
+    return <Observable<Region[]>>this.http.get(this.uri)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }*/
+  
+  
+  
     // this.result = {friends:[]};
      //this.http.get(this.uri).map((res: Response) => res.json()).subscribe(res => this.result = res);
     // this.http.get(this.uri).map(res => res.json()).subscribe(r => this.Regions = r);
@@ -35,7 +41,8 @@ export class HTTPEveService {
     //return this.http.get(this.uri)
      // .map(this.extractData)
      // .catch(this.handleError);
-  }
+
+  /*
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
@@ -51,4 +58,4 @@ private handleError (error: any) {
 }
 
   
-}
+}*/
