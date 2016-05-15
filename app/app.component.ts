@@ -35,10 +35,16 @@ export class AppComponent implements OnInit {
      getRegions(){
          //this.regions = localforage.getItem("Regions");
          this.eveService.getRegions().subscribe(res => {
-                this.Regs = res.items;
+                this.Regs =  res.items.filter(function(el: Array<Region>){
+                  if(isNaN(el.name.slice(-1)))
+                  {
+                   return true;
+                  }
+                });
                 
-                if(this.Regs.length > 0)
+                if (this.Regs.length > 0){
                   this.loaded = true;
+                }
                 //.filter(function (item: any) {
                   //  if (this.isNumeric(item.name.substring(item.name.length - 1)) === false){
                     //    return item;
