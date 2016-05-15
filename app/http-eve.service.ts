@@ -3,18 +3,24 @@ import {Injectable} from '@angular/core';
 import {Region} from './Region';
 import {  Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-//import 'rxjs/add/operator/map';
+
+ //import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HTTPEveService {
   private uri = 'https://crest-tq.eveonline.com/regions/';
-  private Regions = Object;
+  public Regions: any;
+  private sts: any;
+   public loading: boolean;
    data: any;
-    loading: boolean;
+  
   result: Object;
   constructor(private http: Http) { }
   
-
+    isNumeric(n: string): boolean {
+    return !isNaN(parseFloat(n));
+  }
+  
   getRegions(): void {
     this.loading = true;
         this.http.get(this.uri)
@@ -22,6 +28,12 @@ export class HTTPEveService {
             .subscribe(res => {
                 this.data = res;
                 this.loading = false;
+                this.Regions = this.data.items;
+                //.filter(function (item: any) {
+                  //  if (this.isNumeric(item.name.substring(item.name.length - 1)) === false){
+                    //    return item;
+                    //}
+                //});
             });
   }}
   

@@ -5,7 +5,7 @@ import { HTTPEveService } from './http-eve.service';
 import {HTTP_PROVIDERS} from '@angular/http';
 import 'rxjs/Rx';
 import {Regions} from './mock-Regions';
-import {localforage} from 'localforage';
+//import {localforage} from 'localforage';
 // remember to run tsd install package to definitely type these.
 // package.json has the dependency list
 
@@ -15,27 +15,28 @@ import {localforage} from 'localforage';
     template: `<h1>{{title}}</h1>
     <h2> function counter = {{cntr}}</h2>
     <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
-     
+    <ul>
+    <li *ngFor="let hero of heroes">
+      {{ regions.name }}
+      </li>
+  </ul>
+  <h2> hasloaded = {{loaded}} </h2>
     `,
-    providers: [HTTPEveService, HTTP_PROVIDERS, localforage]
+    providers: [HTTPEveService, HTTP_PROVIDERS]
 })
 export class AppComponent implements OnInit {
     public title ="Regions List";
     private errorMessage = '';
     private regions = {};
     private cntr = 0;
-    
+    private loaded = false;
       constructor(private eveService: HTTPEveService) { }
     
      getRegions(){
-         this.regions = localforage.getItem("Regions");
+         //this.regions = localforage.getItem("Regions");
          this.eveService.getRegions();
-         this.regions = this.eveService.data;
-         this.regions = this.eveService.data.items.filter(function (item: any) {
-                    var st = item.name.substring(item.name.length - 1);
-                    if (jQuery.isNumeric(st)==false)
-                        return item;
-                });
+         this.regions = this.eveService.Regions;
+         this.loaded = !this.eveService.loading;
      //    localStorage.setItem("Regions",JSON.stringify(this.regions));
 
          
