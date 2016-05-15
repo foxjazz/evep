@@ -16,16 +16,16 @@ import {Regions} from './mock-Regions';
     <h2> function counter = {{cntr}}</h2>
     <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
     <ul>
-    <li *ngFor="let Region of eveService.Regions">
+    <li *ngFor="let Region of Regs">
       {{ Region.name }}
       </li>
   </ul>
-  <h2> is loading = {{eveService.loading}} </h2>
+  <h2> loading status = {{loaded}} </h2>
     `,
     providers: [HTTPEveService, HTTP_PROVIDERS]
 })
 export class AppComponent implements OnInit {
-    public title ="Regions List";
+    public title = "Regions List";
     private errorMessage = '';
     public Regs: Array<Region>;
     private cntr = 0;
@@ -34,9 +34,19 @@ export class AppComponent implements OnInit {
     
      getRegions(){
          //this.regions = localforage.getItem("Regions");
-         this.eveService.getRegions();
-         this.Regs = this.eveService.Regions;
-         this.loaded = !this.eveService.loading;
+         this.eveService.getRegions().subscribe(res => {
+                this.Regs = res.items;
+                
+                if(this.Regs.length > 0)
+                  this.loaded = true;
+                //.filter(function (item: any) {
+                  //  if (this.isNumeric(item.name.substring(item.name.length - 1)) === false){
+                    //    return item;
+                    //}
+                //});
+            });
+        // this.Regs = this.eveService.Regions;
+         //this.loaded = !this.eveService.loading;
      //    localStorage.setItem("Regions",JSON.stringify(this.regions));
 
          
