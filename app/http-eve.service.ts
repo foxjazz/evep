@@ -9,11 +9,11 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class HTTPEveService {
   private uri = 'https://crest-tq.eveonline.com/regions/';
-  public Regions: any;
-  private sts: any;
-   public loading: boolean;
-   data: any;
+  public Regions: Array<Region>;
   
+   public loading: boolean;
+   public d: [Region];
+  public e: Array<Object>;
   result: Object;
   constructor(private http: Http) { }
   
@@ -26,9 +26,9 @@ export class HTTPEveService {
         this.http.get(this.uri)
             .map((res: Response) => res.json())
             .subscribe(res => {
-                this.data = res;
+                this.Regions = res.items;
                 this.loading = false;
-                this.Regions = this.data.items;
+                
                 //.filter(function (item: any) {
                   //  if (this.isNumeric(item.name.substring(item.name.length - 1)) === false){
                     //    return item;
