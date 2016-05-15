@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import {Region} from './region';
+import {IRegions} from './IRegions';
 //import {EveRegionListComponent} from './everegion-list.component';
 import { HTTPEveService } from './http-eve.service';
 import {HTTP_PROVIDERS} from '@angular/http';
@@ -29,13 +30,15 @@ export class AppComponent implements OnInit {
     private errorMessage = '';
     public Regs: Array<Region>;
     private cntr = 0;
+    
     private loaded = false;
       constructor(private eveService: HTTPEveService) { }
+    
     
      getRegions(){
          //this.regions = localforage.getItem("Regions");
          this.eveService.getRegions().subscribe(res => {
-                this.Regs =  res.items.filter(function(el: Array<Region>){
+                this.Regs =  res.items.filter(function(el: Region): boolean{
                   if(isNaN(el.name.slice(-1)))
                   {
                    return true;

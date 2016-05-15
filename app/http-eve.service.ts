@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Region} from './Region';
 import {  Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-
+import {IRegions} from './IRegions';
 //import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -17,11 +17,7 @@ export class HTTPEveService {
   result: Object;
   constructor(private http: Http) { }
   
-    isNumeric(n: string): boolean {
-    return !isNaN(parseFloat(n));
-  }
-  
-  getRegions(): Observable<Object> {
+  getRegions(): Observable<IRegions> {
         return this.http.get(this.uri)
             .map((res: Response) => res.json())
             
