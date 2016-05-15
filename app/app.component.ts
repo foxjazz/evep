@@ -16,7 +16,7 @@ import {Regions} from './mock-Regions';
     <h2> function counter = {{cntr}}</h2>
     <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
     <ul>
-    <li *ngFor="let Region of Regions">
+    <li *ngFor="let Region of Regs">
       {{ Region.name }}
       </li>
   </ul>
@@ -27,7 +27,7 @@ import {Regions} from './mock-Regions';
 export class AppComponent implements OnInit {
     public title ="Regions List";
     private errorMessage = '';
-    private regions = {};
+    public Regs: Array<Region>;
     private cntr = 0;
     private loaded = false;
       constructor(private eveService: HTTPEveService) { }
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
      getRegions(){
          //this.regions = localforage.getItem("Regions");
          this.eveService.getRegions();
-         this.regions = this.eveService.Regions;
+         this.Regs = this.eveService.Regions;
          this.loaded = !this.eveService.loading;
      //    localStorage.setItem("Regions",JSON.stringify(this.regions));
 
