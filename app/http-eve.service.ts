@@ -4,11 +4,13 @@ import {Region} from './Region';
 import {  Http, Response } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {IRegions} from './IRegions';
+import {ISystems} from './ISystems';
 //import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HTTPEveService {
   private uri = 'https://crest-tq.eveonline.com/regions/';
+  private uriSys: string = '';
   public Regions: Array<Region>;
   
    public loading: boolean;
@@ -21,7 +23,16 @@ export class HTTPEveService {
         return this.http.get(this.uri)
             .map((res: Response) => res.json())
             
-  }}
+  }
+  getSystems(id: string): Observable<ISystems> {
+    this.uriSys = 'https://crest-tq.eveonline.com/market/" + id + "/orders/sell/?type=https://crest-tq.eveonline.com/types/34/';
+    return this.http.get(this.uriSys)
+      .map((res: Response) => res.json());
+   
+  }
+  //https://crest-tq.eveonline.com/market/10000002/orders/sell/?type=https://crest-tq.eveonline.com/types/34/
+}
+  
   
     /*
   getRegions(): Observable<Region[]> {
