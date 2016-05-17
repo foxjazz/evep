@@ -25,7 +25,7 @@ export class HTTPEveService {
             
   }
   getSystems(id: string): Observable<ISystems> {
-    this.uriSys = 'https://crest-tq.eveonline.com/market/" + id + "/orders/sell/?type=https://crest-tq.eveonline.com/types/34/';
+    this.uriSys = 'https://crest-tq.eveonline.com/market/' + id + '/orders/sell/?type=https://crest-tq.eveonline.com/types/34/';
     return this.http.get(this.uriSys)
       .map((res: Response) => res.json());
    
